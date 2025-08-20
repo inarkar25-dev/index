@@ -8,25 +8,20 @@
 
   <!-- Favicon: cow emoji on GauPrem green -->
   <link rel="icon" type="image/svg+xml" sizes="any"
-        href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%2369d089'/><text x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-size='38'>🐮</text></svg>'">
+        href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%2369d089'/><text x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-size='38'>🐮</text></svg>">
 
   <!-- Open Graph / Social -->
   <meta property="og:title" content="GauPrem — Restore Hope, Save Cows" />
   <meta property="og:description" content="Your donation feeds and cares for impoverished cows in India. 100% of funds go to food, medical care, and shelter." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://inarkar25-dev.github.io/index/" />
-  <meta property="og:image" content="https://inarkar25-dev.github.io/index/IMG_3967.jpg" />
+  <meta property="og:image" content="https://inarkar25-dev.github.io/index/IMG_3841.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <style>
     :root{
-      --bg: #0e1210;
-      --card: #151a17;
-      --accent: #69d089; /* GauPrem green */
-      --accent-2: #c5f7d7;
-      --text: #f2fff6;
-      --muted: #b9d2c0;
-      --ring: rgba(105,208,137,.45);
+      --bg:#0e1210; --card:#151a17; --accent:#69d089; --accent-2:#c5f7d7;
+      --text:#f2fff6; --muted:#b9d2c0; --ring:rgba(105,208,137,.45);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -34,74 +29,57 @@
       margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       background: radial-gradient(1200px 600px at 10% -10%, #17241a 0%, rgba(26,33,71,0) 60%),
                   radial-gradient(1000px 500px at 100% 10%, #142017 0%, rgba(22,33,73,0) 60%), var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      color:var(--text); line-height:1.6;
     }
-    a{ color: var(--accent); text-decoration: none; }
-    a:hover{ text-decoration: underline; }
-    .container{ max-width: 1100px; margin: 0 auto; padding: 24px; }
+    a{ color:var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    .container{ max-width:1100px; margin:0 auto; padding:24px; }
     .nav{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0; }
     .brand{ display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.2px; }
     .logo{
       width:36px; height:36px; border-radius:10px;
-      background: linear-gradient(135deg,#69d089,#b6ffcc);
-      box-shadow: 0 0 0 4px rgba(105,208,137,.15);
+      background:linear-gradient(135deg,#69d089,#b6ffcc);
+      box-shadow:0 0 0 4px rgba(105,208,137,.15);
       display:flex; align-items:center; justify-content:center;
       font-size:22px; line-height:1; user-select:none;
     }
-    .btn{ background: var(--accent); color:#0a110b; padding: 10px 16px; border-radius: 12px; font-weight:800; border: none; cursor: pointer; box-shadow: 0 10px 30px -10px var(--ring); }
-    .btn:hover{ filter: brightness(1.05); }
-    .btn.ghost{ background: transparent; color: var(--accent); border:1px solid rgba(105,208,137,.45); }
-    .hero{ display:grid; grid-template-columns: 1.05fr .95fr; gap: 28px; align-items:center; padding: 36px 0 18px; }
-    .hero h1{ font-size: clamp(2rem, 3.2vw + 1rem, 3.25rem); line-height:1.15; margin: 0 0 12px; letter-spacing:.3px; }
-    .hero p{ font-size: 1.1rem; color: var(--muted); margin: 0 0 18px; }
-    .card{ background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border: 1px solid rgba(105,208,137,.2); border-radius: 18px; padding: 18px; box-shadow: 0 12px 40px -18px rgba(0,0,0,.5); }
-    .kpis{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
-    .kpi{ background: var(--card); border-radius: 14px; padding: 14px; text-align:center; border:1px solid rgba(105,208,137,.12); }
-    .kpi strong{ display:block; font-size: 1.35rem; }
-    .figure{ border-radius: 16px; overflow:hidden; border:1px solid rgba(105,208,137,.25); background:#0b100c; }
-    .figure img{ width:100%; height: auto; display:block; }
-    .caption{ font-size:.95rem; color: var(--muted); padding:10px 12px; background: rgba(255,255,255,.02); }
-
-    .section{ padding: 36px 0; }
-    .grid{ display:grid; gap: 16px; }
-    .grid.cols-3{ grid-template-columns: repeat(3, 1fr); }
-    .grid.cols-2{ grid-template-columns: repeat(2, 1fr); }
-    .tile{ background: var(--card); border-radius: 16px; padding: 18px; border:1px solid rgba(105,208,137,.12); }
+    .btn{ background:var(--accent); color:#0a110b; padding:10px 16px; border-radius:12px; font-weight:800; border:none; cursor:pointer; box-shadow:0 10px 30px -10px var(--ring); }
+    .btn:hover{ filter:brightness(1.05); }
+    .btn.ghost{ background:transparent; color:var(--accent); border:1px solid rgba(105,208,137,.45); }
+    .hero{ display:grid; grid-template-columns:1.05fr .95fr; gap:28px; align-items:center; padding:36px 0 18px; }
+    .hero h1{ font-size:clamp(2rem, 3.2vw + 1rem, 3.25rem); line-height:1.15; margin:0 0 12px; letter-spacing:.3px; }
+    .hero p{ font-size:1.1rem; color:var(--muted); margin:0 0 18px; }
+    .card{ background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border:1px solid rgba(105,208,137,.2); border-radius:18px; padding:18px; box-shadow:0 12px 40px -18px rgba(0,0,0,.5); }
+    .kpis{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:16px; }
+    .kpi{ background:var(--card); border-radius:14px; padding:14px; text-align:center; border:1px solid rgba(105,208,137,.12); }
+    .kpi strong{ display:block; font-size:1.35rem; }
+    .figure{ border-radius:16px; overflow:hidden; border:1px solid rgba(105,208,137,.25); background:#0b100c; }
+    .figure img{ width:100%; height:auto; display:block; }
+    .caption{ font-size:.95rem; color:var(--muted); padding:10px 12px; background:rgba(255,255,255,.02); }
+    .section{ padding:36px 0; }
+    .grid{ display:grid; gap:16px; }
+    .grid.cols-3{ grid-template-columns:repeat(3,1fr); }
+    .grid.cols-2{ grid-template-columns:repeat(2,1fr); }
+    .tile{ background:var(--card); border-radius:16px; padding:18px; border:1px solid rgba(105,208,137,.12); }
     .tile h3{ margin-top:0; }
-
-    details{ background: var(--card); border-radius: 14px; border:1px solid rgba(105,208,137,.12); padding: 14px 16px; }
-    details + details{ margin-top: 10px; }
-    summary{ cursor: pointer; font-weight: 700; }
-    details[open]{ box-shadow: 0 0 0 3px var(--ring) inset; }
-
+    details{ background:var(--card); border-radius:14px; border:1px solid rgba(105,208,137,.12); padding:14px 16px; }
+    details + details{ margin-top:10px; }
+    summary{ cursor:pointer; font-weight:700; }
+    details[open]{ box-shadow:0 0 0 3px var(--ring) inset; }
     .cta{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
-    .minor{ color: var(--muted); font-size: .95rem; }
-
-    .footer{ padding: 36px 0 48px; color: var(--muted); font-size: .95rem; }
-    .footer a{ color: var(--muted); }
-
-    /* Inline editor outline */
-    .editable[contenteditable="true"]{ outline: 2px dashed var(--accent); outline-offset: 6px; border-radius: 8px; }
-
-    /* Hide editor bar for everyone; show only in admin mode */
-    .editor-bar{ display:none; position: fixed; right: 16px; bottom: 16px; gap:8px; z-index: 50; }
+    .minor{ color:var(--muted); font-size:.95rem; }
+    .footer{ padding:36px 0 48px; color:var(--muted); font-size:.95rem; }
+    .footer a{ color:var(--muted); }
+    .editable[contenteditable="true"]{ outline:2px dashed var(--accent); outline-offset:6px; border-radius:8px; }
+    .editor-bar{ display:none; position:fixed; right:16px; bottom:16px; gap:8px; z-index:50; }
     .admin .editor-bar{ display:flex; }
-
-    @media (max-width: 900px){ .hero{ grid-template-columns: 1fr; } }
-    @media (max-width: 720px){ .grid.cols-3{ grid-template-columns: 1fr; } .grid.cols-2{ grid-template-columns: 1fr; } }
+    @media (max-width:900px){ .hero{ grid-template-columns:1fr; } }
+    @media (max-width:720px){ .grid.cols-3{ grid-template-columns:1fr; } .grid.cols-2{ grid-template-columns:1fr; } }
   </style>
 
   <!-- Structured data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "NGO",
-    "name": "GauPrem",
-    "url": "https://inarkar25-dev.github.io/index/",
-    "missionStatement": "Rescue and care for cows in India through food, medical care, and safe shelter.",
-    "areaServed": "India"
-  }
+  {"@context":"https://schema.org","@type":"NGO","name":"GauPrem","url":"https://inarkar25-dev.github.io/index/","missionStatement":"Rescue and care for cows in India through food, medical care, and safe shelter.","areaServed":"India"}
   </script>
 </head>
 <body>
@@ -111,9 +89,7 @@
       <span>GauPrem</span>
     </div>
     <div class="cta">
-      <!-- Top (nav) button text: GoFundMe; href filled by JS from DEFAULTS.gofundmeUrl -->
-      <a class="btn" id="donateTop" href="#" target="_blank" rel="noopener noreferrer"
-         aria-label="Open GauPrem GoFundMe in a new tab">GoFundMe</a>
+      <a class="btn" id="donateTop" href="#" target="_blank" rel="noopener noreferrer">GoFundMe</a>
     </div>
   </header>
 
@@ -125,7 +101,6 @@
           In many parts of rural India, cows are symbols of compassion, peace, and life. Yet too many face neglect, malnutrition, and disease. At <strong>GauPrem</strong> (CowLove), our mission is simple: rescue suffering cows and provide the <em>food, medical care, and safe shelter</em> they desperately need.
         </p>
         <div class="cta">
-          <!-- Big hero button: send to pay.gauprem.org -->
           <a class="btn" id="donateHero" href="https://pay.gauprem.org/" target="_blank" rel="noopener noreferrer">Donate to GauPrem</a>
           <span class="minor">Every penny is used to feed impoverished cows in India.</span>
         </div>
@@ -135,8 +110,9 @@
           <div class="kpi editable" data-key="kpi3" role="listitem"><strong>Transparency</strong><span>receipts & updates</span></div>
         </div>
       </div>
+
       <figure class="figure card">
-        <!-- Use your JPG at the repo root -->
+        <!-- ✅ Image set to IMG_3841.jpg -->
         <img id="heroImg" src="IMG_3841.jpg" alt="A rescued cow photographed by the GauPrem team" />
         <figcaption class="caption editable" data-key="caption">Photo by the GauPrem Team — showing the miserable condition many cows endure before rescue.</figcaption>
       </figure>
@@ -169,7 +145,6 @@
             <li><strong>Receipts & updates:</strong> we post spending summaries regularly</li>
             <li><strong>Local action:</strong> operated by volunteers on the ground in India</li>
           </ul>
-          <!-- Mid button stays GoFundMe (filled by JS) -->
           <p style="margin-top:10px"><a class="btn" id="donateMid" href="#" target="_blank" rel="noopener noreferrer">Give on GoFundMe</a></p>
         </article>
       </div>
@@ -203,7 +178,6 @@
     <section class="section card" aria-labelledby="newsletter">
       <h2 id="newsletter">Stay in the loop</h2>
       <p class="minor">We’ll only email about rescue updates. No spam.</p>
-      <!-- Embedded Google Form -->
       <iframe id="gform" src="https://docs.google.com/forms/d/e/1FAIpQLSciomsN2a3sLSct0pNu64DgfaUtNBuJVqgbayIWhTf5e5OhAw/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="GauPrem updates form">Loading…</iframe>
     </section>
   </main>
@@ -217,22 +191,21 @@
     </div>
   </footer>
 
-  <!-- Edit / Settings / Download bar (admin-only by default) -->
+  <!-- Admin controls (hidden unless in admin mode) -->
   <div class="editor-bar">
     <button class="btn ghost" id="editToggle" aria-pressed="false">✏️ Edit</button>
     <button class="btn ghost" id="settingsBtn" title="Set GoFundMe & image">⚙️</button>
     <button class="btn ghost" id="downloadBtn">⬇️ Download</button>
   </div>
 
-  <!-- Settings Dialog -->
   <dialog id="settingsDialog" class="card" style="border:none;">
-    <form method="dialog" style="display:flex; flex-direction:column; gap:10px; min-width: 320px;">
+    <form method="dialog" style="display:flex; flex-direction:column; gap:10px; min-width:320px;">
       <h3 style="margin:0">Settings</h3>
       <label>GoFundMe URL
         <input id="cfgGfm" type="url" placeholder="https://www.gofundme.com/f/gauprem" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)">
       </label>
       <label>Hero Image URL
-        <input id="cfgImg" type="url" placeholder="IMG_3841.jpg.jpg or images/hero.jpg" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)">
+        <input id="cfgImg" type="url" placeholder="IMG_3841.jpg or images/hero.jpg" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)">
       </label>
       <menu style="display:flex; gap:8px; justify-content:flex-end; margin:0; padding:0;">
         <button class="btn ghost" value="cancel">Cancel</button>
@@ -245,8 +218,8 @@
     // === CONFIG ===
     const CONFIG_KEY = 'gauprem_site_config_v1';
     const DEFAULTS = {
-      gofundmeUrl: 'https://www.gofundme.com/f/gauprem', // GoFundMe for top & mid buttons
-      heroImg: 'IMG_3841.jpg' // your JPG at the repo root (no leading slash)
+      gofundmeUrl: 'https://www.gofundme.com/f/gauprem',
+      heroImg: 'IMG_3841.jpg' // <-- default hero image
     };
 
     const $ = (sel) => document.querySelector(sel);
@@ -258,7 +231,7 @@
     function saveConfig(cfg){ localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg)); }
 
     const cfg = loadConfig();
-    const donateLinks = ['#donateTop','#donateMid'].map($); // Top & mid come from GoFundMe
+    const donateLinks = ['#donateTop','#donateMid'].map($);
     const heroImg = $('#heroImg');
 
     function applyConfig(){
