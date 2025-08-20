@@ -52,6 +52,9 @@
     .btn{ background: var(--accent); color:#0a110b; padding: 10px 16px; border-radius: 12px; font-weight:800; border: none; cursor: pointer; box-shadow: 0 10px 30px -10px var(--ring); }
     .btn:hover{ filter: brightness(1.05); }
     .btn.ghost{ background: transparent; color: var(--accent); border:1px solid rgba(105,208,137,.45); }
+    /* Small button for KPI */
+    .btn.small{ padding:6px 10px; border-radius:10px; font-size:.95rem; }
+
     .hero{ display:grid; grid-template-columns: 1.05fr .95fr; gap: 28px; align-items:center; padding: 36px 0 18px; }
     .hero h1{ font-size: clamp(2rem, 3.2vw + 1rem, 3.25rem); line-height:1.15; margin: 0 0 12px; letter-spacing:.3px; }
     .hero p{ font-size: 1.1rem; color: var(--muted); margin: 0 0 18px; }
@@ -80,15 +83,6 @@
 
     .footer{ padding: 36px 0 48px; color: var(--muted); font-size: .95rem; }
     .footer a{ color: var(--muted); }
-
-    /* KPI link */
-    .kpi .kpi-link{
-      display:inline-block;
-      margin-top:8px;
-      font-weight:700;
-      color: var(--accent);
-    }
-    .kpi .kpi-link:hover{ text-decoration: underline; }
 
     /* Inline editor outline */
     .editable[contenteditable="true"]{ outline: 2px dashed var(--accent); outline-offset: 6px; border-radius: 8px; }
@@ -138,16 +132,13 @@
         <div class="kpis" role="list" aria-label="Impact metrics">
           <div class="kpi editable" data-key="kpi1" role="listitem"><strong>100%</strong><span>of funds to cows</span></div>
           <div class="kpi editable" data-key="kpi2" role="listitem"><strong>Food • Care • Shelter</strong><span>our three pillars</span></div>
-
-          <!-- Transparency KPI with More info link (locked: not editable) -->
-          <div class="kpi" role="listitem">
+          <div class="kpi editable" data-key="kpi3" role="listitem">
             <strong>Transparency</strong>
-            <span>receipts &amp; updates</span>
-            <a class="kpi-link"
+            <span>receipts &amp; updates</span><br>
+            <a class="btn small"
                href="https://drive.google.com/drive/folders/1K3IgFfyTfAOYU64uAkH3ogwWIFOvA-Yf?usp=drive_link"
-               target="_blank" rel="noopener noreferrer"
-               aria-label="Open Transparency folder with receipts and updates (opens in a new tab)">
-              More info →
+               target="_blank" rel="noopener noreferrer">
+              More info
             </a>
           </div>
         </div>
@@ -395,5 +386,3 @@
   </script>
 </body>
 </html>
-
-
