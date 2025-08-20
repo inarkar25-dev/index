@@ -46,6 +46,7 @@
     .btn{ background:var(--accent); color:#0a110b; padding:10px 16px; border-radius:12px; font-weight:800; border:none; cursor:pointer; box-shadow:0 10px 30px -10px var(--ring); }
     .btn:hover{ filter:brightness(1.05); }
     .btn.ghost{ background:transparent; color:var(--accent); border:1px solid rgba(105,208,137,.45); }
+    .btn.small{ padding:8px 12px; border-radius:10px; font-size:.95rem; }
     .hero{ display:grid; grid-template-columns:1.05fr .95fr; gap:28px; align-items:center; padding:36px 0 18px; }
     .hero h1{ font-size:clamp(2rem, 3.2vw + 1rem, 3.25rem); line-height:1.15; margin:0 0 12px; letter-spacing:.3px; }
     .hero p{ font-size:1.1rem; color:var(--muted); margin:0 0 18px; }
@@ -102,6 +103,7 @@
         </p>
         <div class="cta">
           <a class="btn" id="donateHero" href="https://pay.gauprem.org/" target="_blank" rel="noopener noreferrer">Donate to GauPrem</a>
+          <a class="btn ghost" id="moreInfo" href="https://drive.google.com/drive/folders/1K3IgFfyTfAOYU64uAkH3ogwWIFOvA-Yf" target="_blank" rel="noopener noreferrer">More info</a>
           <span class="minor">Every penny is used to feed impoverished cows in India.</span>
         </div>
         <div class="kpis" role="list" aria-label="Impact metrics">
@@ -112,7 +114,7 @@
       </div>
 
       <figure class="figure card">
-        <!-- ✅ Image set to IMG_3841.jpg -->
+        <!-- Hero image -->
         <img id="heroImg" src="IMG_3841.jpg" alt="A rescued cow photographed by the GauPrem team" />
         <figcaption class="caption editable" data-key="caption">Photo by the GauPrem Team — showing the miserable condition many cows endure before rescue.</figcaption>
       </figure>
@@ -219,7 +221,7 @@
     const CONFIG_KEY = 'gauprem_site_config_v1';
     const DEFAULTS = {
       gofundmeUrl: 'https://www.gofundme.com/f/gauprem',
-      heroImg: 'IMG_3841.jpg' // <-- default hero image
+      heroImg: 'IMG_3841.jpg' // desired hero image
     };
 
     const $ = (sel) => document.querySelector(sel);
@@ -230,21 +232,23 @@
     }
     function saveConfig(cfg){ localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg)); }
 
+    // Load + normalize config (fix old emoji/placeholder values)
     const cfg = loadConfig();
+    if (!cfg.heroImg || /data:image|placehold/i.test(cfg.heroImg) || cfg.heroImg === 'IMG_3967.jpg') {
+      cfg.heroImg = DEFAULTS.heroImg;
+      saveConfig(cfg);
+    }
+
     const donateLinks = ['#donateTop','#donateMid'].map($);
     const heroImg = $('#heroImg');
 
     function applyConfig(){
       donateLinks.forEach(a => { if(a) a.href = cfg.gofundmeUrl; });
-      if(heroImg) heroImg.src = cfg.heroImg;
+      if (heroImg) heroImg.src = cfg.heroImg;
 
-      // Ensure hero button goes to GauPrem Pay
       const donateHeroBtn = document.getElementById('donateHero');
-      if (donateHeroBtn) {
-        donateHeroBtn.href = 'https://pay.gauprem.org/';
-        donateHeroBtn.textContent = 'Donate to GauPrem';
-      }
-      // Label the top button as "GoFundMe"
+      if (donateHeroBtn) { donateHeroBtn.href = 'https://pay.gauprem.org/'; donateHeroBtn.textContent = 'Donate to GauPrem'; }
+
       const donateTopBtn = document.getElementById('donateTop');
       if (donateTopBtn) donateTopBtn.textContent = 'GoFundMe';
     }
@@ -325,13 +329,12 @@
       }
     });
 
-    // --- Admin-only editor bar toggle ---
+    // Admin mode toggle (?admin=1 / ?logout=1)
     (function(){
       const url = new URL(location.href);
       if (url.searchParams.has('admin')) localStorage.setItem('gauprem_admin','1');
       if (url.searchParams.has('logout')) localStorage.removeItem('gauprem_admin');
-      const isAdmin = localStorage.getItem('gauprem_admin') === '1';
-      if (isAdmin) document.documentElement.classList.add('admin');
+      if (localStorage.getItem('gauprem_admin') === '1') document.documentElement.classList.add('admin');
     })();
   </script>
 </body>
