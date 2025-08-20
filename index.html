@@ -337,6 +337,29 @@
         if(f && !Number.isNaN(n) && n > 400 && n < 2000){ f.style.height = n + 'px'; }
       }
     });
+    <!-- Admin-only toggle for the editor bar -->
+<script>
+(function(){
+  const url = new URL(location.href);
+
+  // Turn admin ON: visit ?admin=1 once (it persists in this browser)
+  if (url.searchParams.has('admin')) {
+    localStorage.setItem('gauprem_admin','1');
+  }
+  // Turn admin OFF: visit ?logout=1
+  if (url.searchParams.has('logout')) {
+    localStorage.removeItem('gauprem_admin');
+  }
+
+  const isAdmin = localStorage.getItem('gauprem_admin') === '1';
+
+  // Add the .admin class so your CSS shows the bar for admins only
+  if (isAdmin) {
+    document.documentElement.classList.add('admin');
+  }
+})();
+</script>
+
   </script>
 </body>
 </html>
