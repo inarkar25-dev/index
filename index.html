@@ -14,8 +14,8 @@
   <meta property="og:title" content="GauPrem — Restore Hope, Save Cows" />
   <meta property="og:description" content="Your donation feeds and cares for impoverished cows in India. 100% of funds go to food, medical care, and shelter." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://inarkar25-dev.github.io/index/" />
-  <meta property="og:image" content="https://inarkar25-dev.github.io/index/IMG_3967.jpg" />
+  <meta property="og:url" content="https://gauprem.org/" />
+  <meta property="og:image" content="https://example.com/social-card.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <style>
@@ -57,7 +57,7 @@
     .hero p{ font-size: 1.1rem; color: var(--muted); margin: 0 0 18px; }
     .card{ background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border: 1px solid rgba(105,208,137,.2); border-radius: 18px; padding: 18px; box-shadow: 0 12px 40px -18px rgba(0,0,0,.5); }
     .kpis{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
-    .kpi{ background: var(--card); border-radius: 14px; padding: 14px; text-align:center; border:1px solid rgba(105,208,137,.12); }
+    .kpi{ background: var(--card); border-radius: 14px; padding: 14px; text-align:left; border:1px solid rgba(105,208,137,.12); }
     .kpi strong{ display:block; font-size: 1.35rem; }
     .figure{ border-radius: 16px; overflow:hidden; border:1px solid rgba(105,208,137,.25); background:#0b100c; }
     .figure img{ width:100%; height: auto; display:block; }
@@ -81,6 +81,15 @@
     .footer{ padding: 36px 0 48px; color: var(--muted); font-size: .95rem; }
     .footer a{ color: var(--muted); }
 
+    /* KPI link */
+    .kpi .kpi-link{
+      display:inline-block;
+      margin-top:8px;
+      font-weight:700;
+      color: var(--accent);
+    }
+    .kpi .kpi-link:hover{ text-decoration: underline; }
+
     /* Inline editor outline */
     .editable[contenteditable="true"]{ outline: 2px dashed var(--accent); outline-offset: 6px; border-radius: 8px; }
 
@@ -98,7 +107,7 @@
     "@context": "https://schema.org",
     "@type": "NGO",
     "name": "GauPrem",
-    "url": "https://inarkar25-dev.github.io/index/",
+    "url": "https://gauprem.org/",
     "missionStatement": "Rescue and care for cows in India through food, medical care, and safe shelter.",
     "areaServed": "India"
   }
@@ -111,9 +120,7 @@
       <span>GauPrem</span>
     </div>
     <div class="cta">
-      <!-- Top (nav) button text: GoFundMe; href filled by JS from DEFAULTS.gofundmeUrl -->
-      <a class="btn" id="donateTop" href="#" target="_blank" rel="noopener noreferrer"
-         aria-label="Open GauPrem GoFundMe in a new tab">GoFundMe</a>
+      <a class="btn" id="donateTop" href="#" target="_blank" rel="noopener noreferrer" aria-label="Open GauPrem GoFundMe in a new tab">Donate on GoFundMe</a>
     </div>
   </header>
 
@@ -125,19 +132,28 @@
           In many parts of rural India, cows are symbols of compassion, peace, and life. Yet too many face neglect, malnutrition, and disease. At <strong>GauPrem</strong> (CowLove), our mission is simple: rescue suffering cows and provide the <em>food, medical care, and safe shelter</em> they desperately need.
         </p>
         <div class="cta">
-          <!-- Big hero button: send to pay.gauprem.org -->
-          <a class="btn" id="donateHero" href="https://pay.gauprem.org/" target="_blank" rel="noopener noreferrer">Donate to GauPrem</a>
+          <a class="btn" id="donateHero" href="#" target="_blank" rel="noopener noreferrer">Donate on GoFundMe</a>
           <span class="minor">Every penny is used to feed impoverished cows in India.</span>
         </div>
         <div class="kpis" role="list" aria-label="Impact metrics">
           <div class="kpi editable" data-key="kpi1" role="listitem"><strong>100%</strong><span>of funds to cows</span></div>
           <div class="kpi editable" data-key="kpi2" role="listitem"><strong>Food • Care • Shelter</strong><span>our three pillars</span></div>
-          <div class="kpi editable" data-key="kpi3" role="listitem"><strong>Transparency</strong><span>receipts & updates</span></div>
+
+          <!-- Transparency KPI with More info link (locked: not editable) -->
+          <div class="kpi" role="listitem">
+            <strong>Transparency</strong>
+            <span>receipts &amp; updates</span>
+            <a class="kpi-link"
+               href="https://drive.google.com/drive/folders/1K3IgFfyTfAOYU64uAkH3ogwWIFOvA-Yf?usp=drive_link"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Open Transparency folder with receipts and updates (opens in a new tab)">
+              More info →
+            </a>
+          </div>
         </div>
       </div>
       <figure class="figure card">
-        <!-- Use your JPG at the repo root -->
-        <img id="heroImg" src="IMG_3967.jpg" alt="A rescued cow photographed by the GauPrem team" />
+        <img id="heroImg" alt="A rescued cow photographed by the GauPrem team" />
         <figcaption class="caption editable" data-key="caption">Photo by the GauPrem Team — showing the miserable condition many cows endure before rescue.</figcaption>
       </figure>
     </section>
@@ -169,8 +185,24 @@
             <li><strong>Receipts & updates:</strong> we post spending summaries regularly</li>
             <li><strong>Local action:</strong> operated by volunteers on the ground in India</li>
           </ul>
-          <!-- Mid button stays GoFundMe (filled by JS) -->
           <p style="margin-top:10px"><a class="btn" id="donateMid" href="#" target="_blank" rel="noopener noreferrer">Give on GoFundMe</a></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Donation Options -->
+    <section class="section" aria-labelledby="donateOptions">
+      <h2 id="donateOptions">Donate — choose your platform</h2>
+      <div class="grid">
+        <article class="tile">
+          <h3>GoFundMe</h3>
+          <p>Donate via GoFundMe to help us reach more supporters and share updates easily.</p>
+          <p><a class="btn" id="donateGoFundMe" href="#" target="_blank" rel="noopener noreferrer" aria-label="Open GoFundMe donation page">Open GoFundMe</a></p>
+        </article>
+        <article class="tile">
+          <h3>Direct Pay (GauPrem)</h3>
+          <p>Donate directly to GauPrem to maximize impact with fewer fees.</p>
+          <p><a class="btn" id="donateDirect" href="https://pay.gauprem.org/" target="_blank" rel="noopener noreferrer" aria-label="Open GauPrem direct payment portal">Donate at pay.gauprem.org</a></p>
         </article>
       </div>
     </section>
@@ -203,7 +235,6 @@
     <section class="section card" aria-labelledby="newsletter">
       <h2 id="newsletter">Stay in the loop</h2>
       <p class="minor">We’ll only email about rescue updates. No spam.</p>
-      <!-- Embedded Google Form -->
       <iframe id="gform" src="https://docs.google.com/forms/d/e/1FAIpQLSciomsN2a3sLSct0pNu64DgfaUtNBuJVqgbayIWhTf5e5OhAw/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="GauPrem updates form">Loading…</iframe>
     </section>
   </main>
@@ -231,8 +262,11 @@
       <label>GoFundMe URL
         <input id="cfgGfm" type="url" placeholder="https://www.gofundme.com/f/gauprem" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)">
       </label>
+      <label>Direct Pay URL
+        <input id="cfgDirect" type="url" placeholder="https://pay.gauprem.org/" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)">
+      </label>
       <label>Hero Image URL
-        <input id="cfgImg" type="url" placeholder="IMG_3967.jpg or images/hero.jpg" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)">
+        <input id="cfgImg" type="url" placeholder="hero.jpg or images/hero.jpg" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)">
       </label>
       <menu style="display:flex; gap:8px; justify-content:flex-end; margin:0; padding:0;">
         <button class="btn ghost" value="cancel">Cancel</button>
@@ -245,8 +279,9 @@
     // === CONFIG ===
     const CONFIG_KEY = 'gauprem_site_config_v1';
     const DEFAULTS = {
-      gofundmeUrl: 'https://www.gofundme.com/f/gauprem', // GoFundMe for top & mid buttons
-      heroImg: 'IMG_3967.jpg' // your JPG at the repo root (no leading slash)
+      gofundmeUrl: 'https://www.gofundme.com/f/gauprem', // GoFundMe
+      directPayUrl: 'https://pay.gauprem.org/',          // Direct Pay
+      heroImg: 'https://placehold.co/1200x700?text=GauPrem+Hero+Image'
     };
 
     const $ = (sel) => document.querySelector(sel);
@@ -258,22 +293,14 @@
     function saveConfig(cfg){ localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg)); }
 
     const cfg = loadConfig();
-    const donateLinks = ['#donateTop','#donateMid'].map($); // Top & mid come from GoFundMe
+    const gfmLinks = ['#donateTop','#donateHero','#donateMid','#donateGoFundMe'].map($);
+    const directLinks = ['#donateDirect'].map($);
     const heroImg = $('#heroImg');
 
     function applyConfig(){
-      donateLinks.forEach(a => { if(a) a.href = cfg.gofundmeUrl; });
+      gfmLinks.forEach(a => { if(a) a.href = cfg.gofundmeUrl; });
+      directLinks.forEach(a => { if(a) a.href = cfg.directPayUrl; });
       if(heroImg) heroImg.src = cfg.heroImg;
-
-      // Ensure hero button goes to GauPrem Pay
-      const donateHeroBtn = document.getElementById('donateHero');
-      if (donateHeroBtn) {
-        donateHeroBtn.href = 'https://pay.gauprem.org/';
-        donateHeroBtn.textContent = 'Donate to GauPrem';
-      }
-      // Label the top button as "GoFundMe"
-      const donateTopBtn = document.getElementById('donateTop');
-      if (donateTopBtn) donateTopBtn.textContent = 'GoFundMe';
     }
 
     applyConfig();
@@ -287,6 +314,7 @@
     const settingsBtn = $('#settingsBtn');
     const dialog = $('#settingsDialog');
     const cfgGfm = $('#cfgGfm');
+    const cfgDirect = $('#cfgDirect');
     const cfgImg = $('#cfgImg');
 
     let editing = false;
@@ -332,11 +360,15 @@
     editBtn.addEventListener('click', () => setEditing(!editing));
     downloadBtn.addEventListener('click', downloadHTML);
     settingsBtn.addEventListener('click', () => {
-      cfgGfm.value = cfg.gofundmeUrl; cfgImg.value = cfg.heroImg; dialog.showModal();
+      cfgGfm.value = cfg.gofundmeUrl;
+      cfgDirect.value = cfg.directPayUrl;
+      cfgImg.value = cfg.heroImg;
+      dialog.showModal();
     });
     dialog.addEventListener('close', () => {
       if(dialog.returnValue === 'default'){
         cfg.gofundmeUrl = cfgGfm.value || DEFAULTS.gofundmeUrl;
+        cfg.directPayUrl = cfgDirect.value || DEFAULTS.directPayUrl;
         cfg.heroImg = cfgImg.value || DEFAULTS.heroImg;
         saveConfig(cfg); applyConfig();
       }
@@ -363,4 +395,5 @@
   </script>
 </body>
 </html>
+
 
