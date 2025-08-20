@@ -6,15 +6,17 @@
   <title>GauPrem — Restore Hope, Save Cows</title>
   <meta name="description" content="GauPrem is a nonprofit in India rescuing and caring for abandoned and malnourished cows with food, medical care, and shelter. Support our GoFundMe." />
 
-  <!-- Open Graph / Social -->
+  <!-- Favicon: cow emoji on GauPrem green -->
+  <link rel="icon" type="image/svg+xml" sizes="any"
+        href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%2369d089'/><text x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-size='38'>🐮</text></svg>'">
+
+  <!-- Open Graph / Social (optional: replace og:image with a real absolute URL later) -->
   <meta property="og:title" content="GauPrem — Restore Hope, Save Cows" />
   <meta property="og:description" content="Your donation feeds and cares for impoverished cows in India. 100% of funds go to food, medical care, and shelter." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:url" content="https://gauprem.org/" />
   <meta property="og:image" content="https://example.com/social-card.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-
-  <link rel="icon" href="favicon.ico" />
 
   <style>
     :root{
@@ -79,12 +81,12 @@
     .footer{ padding: 36px 0 48px; color: var(--muted); font-size: .95rem; }
     .footer a{ color: var(--muted); }
 
-    /* Inline editor */
+    /* Inline editor outline */
     .editable[contenteditable="true"]{ outline: 2px dashed var(--accent); outline-offset: 6px; border-radius: 8px; }
-    /* Hide editor bar for everyone by default */
-.editor-bar{ display:none; position: fixed; right: 16px; bottom: 16px; gap:8px; z-index: 50; }
-/* Show when the page is in admin mode */
-.admin .editor-bar{ display:flex; }
+
+    /* Hide editor bar for everyone; show only in admin mode */
+    .editor-bar{ display:none; position: fixed; right: 16px; bottom: 16px; gap:8px; z-index: 50; }
+    .admin .editor-bar{ display:flex; }
 
     @media (max-width: 900px){ .hero{ grid-template-columns: 1fr; } }
     @media (max-width: 720px){ .grid.cols-3{ grid-template-columns: 1fr; } .grid.cols-2{ grid-template-columns: 1fr; } }
@@ -96,7 +98,7 @@
     "@context": "https://schema.org",
     "@type": "NGO",
     "name": "GauPrem",
-    "url": "https://example.com/",
+    "url": "https://gauprem.org/",
     "missionStatement": "Rescue and care for cows in India through food, medical care, and safe shelter.",
     "areaServed": "India"
   }
@@ -109,7 +111,6 @@
       <span>GauPrem</span>
     </div>
     <div class="cta">
-      <!-- 🔁 Replace CONFIG.gofundmeUrl below or use the settings cog -->
       <a class="btn" id="donateTop" href="#" target="_blank" rel="noopener noreferrer" aria-label="Open GauPrem GoFundMe in a new tab">Donate on GoFundMe</a>
     </div>
   </header>
@@ -133,7 +134,7 @@
       </div>
       <figure class="figure card">
         <img id="heroImg" alt="A rescued cow photographed by the GauPrem team" />
-        <figcaption class="caption editable" data-key="caption">Photo by the GauPrem Team.</figcaption>
+        <figcaption class="caption editable" data-key="caption">Photo by the GauPrem Team — showing the miserable condition many cows endure before rescue.</figcaption>
       </figure>
     </section>
 
@@ -211,7 +212,7 @@
     </div>
   </footer>
 
-  <!-- Edit / Settings / Download bar -->
+  <!-- Edit / Settings / Download bar (admin-only by default) -->
   <div class="editor-bar">
     <button class="btn ghost" id="editToggle" aria-pressed="false">✏️ Edit</button>
     <button class="btn ghost" id="settingsBtn" title="Set GoFundMe & image">⚙️</button>
@@ -226,7 +227,7 @@
         <input id="cfgGfm" type="url" placeholder="https://www.gofundme.com/f/gauprem" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)">
       </label>
       <label>Hero Image URL
-        <input id="cfgImg" type="url" placeholder="https://…/gauprem-hero.jpg" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)">
+        <input id="cfgImg" type="url" placeholder="hero.jpg or images/hero.jpg" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)">
       </label>
       <menu style="display:flex; gap:8px; justify-content:flex-end; margin:0; padding:0;">
         <button class="btn ghost" value="cancel">Cancel</button>
@@ -239,10 +240,8 @@
     // === CONFIG ===
     const CONFIG_KEY = 'gauprem_site_config_v1';
     const DEFAULTS = {
-      gofundmeUrl: 'https://www.gofundme.com/f/gauprem',
+      gofundmeUrl: 'https://www.gofundme.com/f/gauprem', // <-- Your fundraiser URL
       heroImg: 'https://placehold.co/1200x700?text=GauPrem+Hero+Image'
-      // Tip: you can use an emoji image by setting heroImg to a data-URL.
-      // e.g., 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700"><rect width="100%25" height="100%25" fill="%230b100c"/><text x="50%25" y="55%25" dominant-baseline="middle" text-anchor="middle" font-size="420">🐮</text></svg>'
     };
 
     const $ = (sel) => document.querySelector(sel);
@@ -337,29 +336,16 @@
         if(f && !Number.isNaN(n) && n > 400 && n < 2000){ f.style.height = n + 'px'; }
       }
     });
-    <!-- Admin-only toggle for the editor bar -->
-<script>
-(function(){
-  const url = new URL(location.href);
 
-  // Turn admin ON: visit ?admin=1 once (it persists in this browser)
-  if (url.searchParams.has('admin')) {
-    localStorage.setItem('gauprem_admin','1');
-  }
-  // Turn admin OFF: visit ?logout=1
-  if (url.searchParams.has('logout')) {
-    localStorage.removeItem('gauprem_admin');
-  }
-
-  const isAdmin = localStorage.getItem('gauprem_admin') === '1';
-
-  // Add the .admin class so your CSS shows the bar for admins only
-  if (isAdmin) {
-    document.documentElement.classList.add('admin');
-  }
-})();
-</script>
-
+    // --- Admin-only editor bar toggle ---
+    (function(){
+      const url = new URL(location.href);
+      if (url.searchParams.has('admin')) localStorage.setItem('gauprem_admin','1');
+      if (url.searchParams.has('logout')) localStorage.removeItem('gauprem_admin');
+      const isAdmin = localStorage.getItem('gauprem_admin') === '1';
+      if (isAdmin) document.documentElement.classList.add('admin');
+    })();
   </script>
 </body>
 </html>
+
