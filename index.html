@@ -81,7 +81,10 @@
 
     /* Inline editor */
     .editable[contenteditable="true"]{ outline: 2px dashed var(--accent); outline-offset: 6px; border-radius: 8px; }
-    .editor-bar{ position: fixed; right: 16px; bottom: 16px; display:flex; gap:8px; z-index: 50; }
+    /* Hide editor bar for everyone by default */
+.editor-bar{ display:none; position: fixed; right: 16px; bottom: 16px; gap:8px; z-index: 50; }
+/* Show when the page is in admin mode */
+.admin .editor-bar{ display:flex; }
 
     @media (max-width: 900px){ .hero{ grid-template-columns: 1fr; } }
     @media (max-width: 720px){ .grid.cols-3{ grid-template-columns: 1fr; } .grid.cols-2{ grid-template-columns: 1fr; } }
@@ -334,6 +337,23 @@
         if(f && !Number.isNaN(n) && n > 400 && n < 2000){ f.style.height = n + 'px'; }
       }
     });
+    (function(){
+  const PROD_HOSTS = ['gauprem.org','www.gauprem.org']; // change to your domain
+  const url = new URL(location.href);
+  const hasAdminParam = url.searchParams.has('admin');
+  const wantsLogout   = url.searchParams.has('logout');
+
+  if (wantsLogout) { localStorage.removeItem('gauprem_admin'); }
+
+  if (hasAdminParam) { localStorage.setItem('gauprem_admin','1'); }
+
+  const isAdmin = localStorage.getItem('gauprem_admin') === '1';
+
+  // Only show the bar on your devices when admin is set
+  if (isAdmin || !PROD_HOSTS.includes(location.hostname)) {
+    document.documentElement.classList.add('admin');
+  }
+})();
   </script>
 </body>
 </html>
