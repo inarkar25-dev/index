@@ -1,325 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GauPrem — Restore Hope, Save Cows</title>
-  <meta name="description" content="GauPrem is a nonprofit in India rescuing and caring for abandoned and malnourished cows with food, medical care, and shelter. Support our GoFundMe." />
+el.contentEditable = editing;
+if(editing){ el.focus(); }
+});
+if(!editing){ saveEdits(); }
+}
 
-  <!-- Open Graph / Social -->
-  <meta property="og:title" content="GauPrem — Restore Hope, Save Cows" />
-  <meta property="og:description" content="Your donation feeds and cares for impoverished cows in India. 100% of funds go to food, medical care, and shelter." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://example.com/" />
-  <meta property="og:image" content="https://example.com/social-card.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="icon" href="favicon.ico" />
+function saveEdits(){
+const data = {};
+document.querySelectorAll('.editable').forEach(el => {
+data[el.dataset.key] = el.innerHTML.trim();
+});
+localStorage.setItem('gauprem_page_copy_v1', JSON.stringify(data));
+}
 
-  <style>
-    :root{
-      --bg: #0e1210;
-      --card: #151a17;
-      --accent: #69d089; /* GauPrem green */
-      --accent-2: #c5f7d7;
-      --text: #f2fff6;
-      --muted: #b9d2c0;
-      --ring: rgba(105,208,137,.45);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 600px at 10% -10%, #17241a 0%, rgba(26,33,71,0) 60%),
-                  radial-gradient(1000px 500px at 100% 10%, #142017 0%, rgba(22,33,73,0) 60%), var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    a{ color: var(--accent); text-decoration: none; }
-    a:hover{ text-decoration: underline; }
-    .container{ max-width: 1100px; margin: 0 auto; padding: 24px; }
-    .nav{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0; }
-    .brand{ display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.2px; }
-    .logo{ width:36px; height:36px; border-radius:10px; background: linear-gradient(135deg,#69d089,#b6ffcc); box-shadow: 0 0 0 4px rgba(105,208,137,.15); }
-    .btn{ background: var(--accent); color:#0a110b; padding: 10px 16px; border-radius: 12px; font-weight:800; border: none; cursor: pointer; box-shadow: 0 10px 30px -10px var(--ring); }
-    .btn:hover{ filter: brightness(1.05); }
-    .btn.ghost{ background: transparent; color: var(--accent); border:1px solid rgba(105,208,137,.45); }
-    .hero{ display:grid; grid-template-columns: 1.05fr .95fr; gap: 28px; align-items:center; padding: 36px 0 18px; }
-    .hero h1{ font-size: clamp(2rem, 3.2vw + 1rem, 3.25rem); line-height:1.15; margin: 0 0 12px; letter-spacing:.3px; }
-    .hero p{ font-size: 1.1rem; color: var(--muted); margin: 0 0 18px; }
-    .card{ background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border: 1px solid rgba(105,208,137,.2); border-radius: 18px; padding: 18px; box-shadow: 0 12px 40px -18px rgba(0,0,0,.5); }
-    .kpis{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
-    .kpi{ background: var(--card); border-radius: 14px; padding: 14px; text-align:center; border:1px solid rgba(105,208,137,.12); }
-    .kpi strong{ display:block; font-size: 1.35rem; }
-    .figure{ border-radius: 16px; overflow:hidden; border:1px solid rgba(105,208,137,.25); background:#0b100c; }
-    .figure img{ width:100%; height: auto; display:block; }
-    .caption{ font-size:.95rem; color: var(--muted); padding:10px 12px; background: rgba(255,255,255,.02); }
 
-    .section{ padding: 36px 0; }
-    .grid{ display:grid; gap: 16px; }
-    .grid.cols-3{ grid-template-columns: repeat(3, 1fr); }
-    .grid.cols-2{ grid-template-columns: repeat(2, 1fr); }
-    .tile{ background: var(--card); border-radius: 16px; padding: 18px; border:1px solid rgba(105,208,137,.12); }
-    .tile h3{ margin-top:0; }
+function loadEdits(){
+try{
+const data = JSON.parse(localStorage.getItem('gauprem_page_copy_v1')) || {};
+document.querySelectorAll('.editable').forEach(el => {
+if(data[el.dataset.key]) el.innerHTML = data[el.dataset.key];
+});
+}catch(e){}
+}
 
-    details{ background: var(--card); border-radius: 14px; border:1px solid rgba(105,208,137,.12); padding: 14px 16px; }
-    details + details{ margin-top: 10px; }
-    summary{ cursor: pointer; font-weight: 700; }
-    details[open]{ box-shadow: 0 0 0 3px var(--ring) inset; }
 
-    .cta{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
-    .minor{ color: var(--muted); font-size: .95rem; }
+function downloadHTML(){
+const blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url; a.download = 'gauprem.html'; a.click();
+URL.revokeObjectURL(url);
+}
 
-    .footer{ padding: 36px 0 48px; color: var(--muted); font-size: .95rem; }
-    .footer a{ color: var(--muted); }
 
-    /* Simple inline editor */
-    .editable[contenteditable="true"]{ outline: 2px dashed var(--accent); outline-offset: 6px; border-radius: 8px; }
-    .editor-bar{ position: fixed; right: 16px; bottom: 16px; display:flex; gap:8px; z-index: 50; }
+loadEdits();
 
-    @media (max-width: 900px){ .hero{ grid-template-columns: 1fr; } }
-    @media (max-width: 720px){ .grid.cols-3{ grid-template-columns: 1fr; } .grid.cols-2{ grid-template-columns: 1fr; } }
-  </style>
 
-  <!-- Structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "NGO",
-    "name": "GauPrem",
-    "url": "https://example.com/",
-    "missionStatement": "Rescue and care for cows in India through food, medical care, and safe shelter.",
-    "areaServed": "India"
-  }
-  </script>
-</head>
-<body>
-  <header class="container nav" aria-label="Top navigation">
-    <div class="brand" aria-label="Site logo and name">
-      <div class="logo" aria-hidden="true"></div>
-      <span>GauPrem</span>
-    </div>
-    <div class="cta">
-      <!-- 🔁 Replace CONFIG.gofundmeUrl below or click the settings cog in Edit Mode -->
-      <a class="btn" id="donateTop" href="#" target="_blank" rel="noopener noreferrer" aria-label="Open GauPrem GoFundMe in a new tab">Donate on GoFundMe</a>
-    </div>
-  </header>
+editBtn.addEventListener('click', () => setEditing(!editing));
+downloadBtn.addEventListener('click', downloadHTML);
+settingsBtn.addEventListener('click', () => {
+cfgGfm.value = cfg.gofundmeUrl; cfgImg.value = cfg.heroImg; dialog.showModal();
+});
+dialog.addEventListener('close', () => {
+if(dialog.returnValue === 'default'){
+cfg.gofundmeUrl = cfgGfm.value || DEFAULTS.gofundmeUrl;
+cfg.heroImg = cfgImg.value || DEFAULTS.heroImg;
+saveConfig(cfg); applyConfig();
+}
+});
 
-  <main class="container" id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <div>
-        <h1 id="hero-title" class="editable" data-key="headline">Restore Hope, Save Cows</h1>
-        <p class="editable" data-key="lead">
-          In many parts of rural India, cows are symbols of compassion, peace, and life. Yet too many face neglect, malnutrition, and disease. At <strong>GauPrem</strong> (CowLove), our mission is simple: rescue suffering cows and provide the <em>food, medical care, and safe shelter</em> they desperately need.
-        </p>
-        <div class="cta">
-          <a class="btn" id="donateHero" href="#" target="_blank" rel="noopener noreferrer">Donate on GoFundMe</a>
-          <span class="minor">Every penny is used to feed impoverished cows in India.</span>
-        </div>
-        <div class="kpis" role="list" aria-label="Impact metrics">
-          <div class="kpi editable" data-key="kpi1" role="listitem"><strong>100%</strong><span>of funds to cows</span></div>
-          <div class="kpi editable" data-key="kpi2" role="listitem"><strong>Food • Care • Shelter</strong><span>our three pillars</span></div>
-          <div class="kpi editable" data-key="kpi3" role="listitem"><strong>Transparency</strong><span>receipts & updates</span></div>
-        </div>
-      </div>
-      <figure class="figure card">
-        <img id="heroImg" alt="A rescued cow photographed by the GauPrem team" />
-        <figcaption class="caption editable" data-key="caption">Photo by the GauPrem Team — showing the miserable condition many cows endure before rescue.</figcaption>
-      </figure>
-    </section>
 
-    <section class="section" aria-labelledby="mission">
-      <h2 id="mission">Our mission</h2>
-      <div class="grid cols-3">
-        <article class="tile editable" data-key="mission1"><h3>Rescue</h3><p>Identify cows suffering from hunger, disease, or abandonment and bring them to safety.</p></article>
-        <article class="tile editable" data-key="mission2"><h3>Care</h3><p>Provide nutritious fodder, clean water, and veterinary care including vaccines and medicines.</p></article>
-        <article class="tile editable" data-key="mission3"><h3>Shelter</h3><p>Offer a clean, secure space to recover, with compassionate daily supervision.</p></article>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="yourhelp">
-      <h2 id="yourhelp">What your donation provides</h2>
-      <div class="grid cols-2">
-        <article class="tile editable" data-key="donationList">
-          <h3>Direct essentials</h3>
-          <ul>
-            <li>Fodder and feed for malnourished cows</li>
-            <li>Veterinary checkups, vaccines, and medicines</li>
-            <li>Temporary shelter materials and clean water</li>
-          </ul>
-        </article>
-        <article class="tile">
-          <h3>Our promise</h3>
-          <ul>
-            <li><strong>100% to cows:</strong> funds are used only for food, medical care, and shelter</li>
-            <li><strong>Receipts & updates:</strong> we post spending summaries regularly</li>
-            <li><strong>Local action:</strong> operated by volunteers on the ground in India</li>
-          </ul>
-          <p style="margin-top:10px"><a class="btn" id="donateMid" href="#" target="_blank" rel="noopener noreferrer">Give on GoFundMe</a></p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="help">
-      <h2 id="help">How you can help</h2>
-      <div class="grid cols-3">
-        <article class="tile"><h3>Donate</h3><p>Even a small contribution buys a meaningful meal. Monthly donations sustain rescues.</p></article>
-        <article class="tile"><h3>Share</h3><p>Spread the word with friends and social media to multiply impact.</p></article>
-        <article class="tile"><h3>Volunteer</h3><p>On‑the‑ground help (feeding, cleaning, transport) is always appreciated — contact us.</p></article>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="faq">
-      <h2 id="faq">FAQ</h2>
-      <details class="editable" data-key="faq1">
-        <summary>Are donations really used only for cows?</summary>
-        <p>Yes. Every penny is guaranteed to be used to feed impoverished cows in India and provide necessary medical care and shelter. We share receipts and updates.</p>
-      </details>
-      <details class="editable" data-key="faq2">
-        <summary>Is GauPrem a nonprofit?</summary>
-        <p>GauPrem is a volunteer‑run nonprofit initiative focused on rescue and care. We operate transparently and dedicate funds to direct essentials.</p>
-      </details>
-      <details class="editable" data-key="faq3">
-        <summary>How can I get updates?</summary>
-        <p>Donate on GoFundMe and opt into updates, or email us to receive monthly summaries with photos and expense breakdowns.</p>
-      </details>
-    </section>
-
-    <section class="section card" aria-labelledby="newsletter">
-      <h2 id="newsletter">Stay in the loop</h2>
-      <p class="minor">We’ll only email about rescue updates. No spam.</p>
-      <!-- Embedded Google Form (your link) -->
-      <iframe id="gform" src="https://docs.google.com/forms/d/e/1FAIpQLSciomsN2a3sLSct0pNu64DgfaUtNBuJVqgbayIWhTf5e5OhAw/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="GauPrem updates form">Loading…</iframe>
-    </section>
-  </main>
-
-  <footer class="container footer">
-    <div style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;">
-      <span>© <span id="y"></span> GauPrem. All rights reserved.</span>
-      <nav aria-label="Footer">
-        <a href="#">About</a> • <a href="#">Contact</a> • <a href="#">Privacy</a>
-      </nav>
-    </div>
-  </footer>
-
-  <div class="editor-bar">
-    <button class="btn ghost" id="editToggle" aria-pressed="false">✏️ Edit</button>
-    <button class="btn ghost" id="settingsBtn" title="Set GoFundMe & image">⚙️</button>
-    <button class="btn ghost" id="downloadBtn">⬇️ Download</button>
-  </div>
-
-  <dialog id="settingsDialog" class="card" style="border:none;">
-    <form method="dialog" style="display:flex; flex-direction:column; gap:10px; min-width: 320px;">
-      <h3 style="margin:0">Settings</h3>
-      <label>GoFundMe URL <input id="cfgGfm" type="url" placeholder="https://www.gofundme.com/f/gauprem" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)"></label>
-      <label>Hero Image URL <input id="cfgImg" type="url" placeholder="https://…/gauprem-hero.jpg" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(105,208,137,.35); background:#0f1511; color:var(--text)"></label>
-      <menu style="display:flex; gap:8px; justify-content:flex-end; margin:0; padding:0;">
-        <button class="btn ghost" value="cancel">Cancel</button>
-        <button class="btn" value="default">Save</button>
-      </menu>
-    </form>
-  </dialog>
-
-  <script>
-    // === CONFIG ===
-    const CONFIG_KEY = 'gauprem_site_config_v1';
-    const DEFAULTS = {
-      gofundmeUrl: 'https://www.gofundme.com/f/gauprem',
-      heroImg: 'https://placehold.co/1200x700?text=GauPrem+Hero+Image'
-    };
-
-    const $ = (sel) => document.querySelector(sel);
-
-    function loadConfig(){
-      try{ return JSON.parse(localStorage.getItem(CONFIG_KEY)) || {...DEFAULTS}; }
-      catch(e){ return {...DEFAULTS}; }
-    }
-    function saveConfig(cfg){ localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg)); }
-
-    const cfg = loadConfig();
-    const donateLinks = ['#donateTop','#donateHero','#donateMid'].map($);
-    const heroImg = $('#heroImg');
-
-    function applyConfig(){
-      donateLinks.forEach(a => { if(a) a.href = cfg.gofundmeUrl; });
-      if(heroImg) heroImg.src = cfg.heroImg;
-    }
-
-    applyConfig();
-
-    // Footer year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // === Inline editor ===
-    const editBtn = $('#editToggle');
-    const downloadBtn = $('#downloadBtn');
-    const settingsBtn = $('#settingsBtn');
-    const dialog = $('#settingsDialog');
-    const cfgGfm = $('#cfgGfm');
-    const cfgImg = $('#cfgImg');
-
-    let editing = false;
-
-    function setEditing(on){
-      editing = !!on;
-      editBtn.setAttribute('aria-pressed', editing);
-      editBtn.textContent = editing ? '✅ Done' : '✏️ Edit';
-      document.querySelectorAll('.editable').forEach(el => {
-        el.contentEditable = editing;
-        if(editing){ el.focus(); }
-      });
-      if(!editing){ saveEdits(); }
-    }
-
-    function saveEdits(){
-      const data = {};
-      document.querySelectorAll('.editable').forEach(el => {
-        data[el.dataset.key] = el.innerHTML.trim();
-      });
-      localStorage.setItem('gauprem_page_copy_v1', JSON.stringify(data));
-    }
-
-    function loadEdits(){
-      try{
-        const data = JSON.parse(localStorage.getItem('gauprem_page_copy_v1')) || {};
-        document.querySelectorAll('.editable').forEach(el => {
-          if(data[el.dataset.key]) el.innerHTML = data[el.dataset.key];
-        });
-      }catch(e){}
-    }
-
-    function downloadHTML(){
-      const blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'gauprem.html'; a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    loadEdits();
-
-    editBtn.addEventListener('click', () => setEditing(!editing));
-    downloadBtn.addEventListener('click', downloadHTML);
-    settingsBtn.addEventListener('click', () => {
-      cfgGfm.value = cfg.gofundmeUrl; cfgImg.value = cfg.heroImg; dialog.showModal();
-    });
-    dialog.addEventListener('close', () => {
-      if(dialog.returnValue === 'default'){
-        cfg.gofundmeUrl = cfgGfm.value || DEFAULTS.gofundmeUrl;
-        cfg.heroImg = cfgImg.value || DEFAULTS.heroImg;
-        saveConfig(cfg); applyConfig();
-      }
-    });
-
-    // Optional: auto-resize Google Form height if it grows
-    window.addEventListener('message', (e) => {
-      if(!e.data || typeof e.data !== 'string') return;
-      if(e.data.indexOf('set-height') > -1){
-        const n = parseInt(e.data.split(':').pop(), 10);
-        const f = document.getElementById('gform');
-        if(f && !Number.isNaN(n) && n > 400 && n < 2000){ f.style.height = n + 'px'; }
-      }
-    });
-  </script>
+// Optional: auto-resize Google Form height if it grows
+window.addEventListener('message', (e) => {
+if(!e.data || typeof e.data !== 'string') return;
+if(e.data.indexOf('set-height') > -1){
+const n = parseInt(e.data.split(':').pop(), 10);
+const f = document.getElementById('gform');
+if(f && !Number.isNaN(n) && n > 400 && n < 2000){ f.style.height = n + 'px'; }
+}
+});
+</script>
 </body>
 </html>
