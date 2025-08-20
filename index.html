@@ -337,23 +337,6 @@
         if(f && !Number.isNaN(n) && n > 400 && n < 2000){ f.style.height = n + 'px'; }
       }
     });
-    (function(){
-  const PROD_HOSTS = ['gauprem.org','www.gauprem.org']; // change to your domain
-  const url = new URL(location.href);
-  const hasAdminParam = url.searchParams.has('admin');
-  const wantsLogout   = url.searchParams.has('logout');
-
-  if (wantsLogout) { localStorage.removeItem('gauprem_admin'); }
-
-  if (hasAdminParam) { localStorage.setItem('gauprem_admin','1'); }
-
-  const isAdmin = localStorage.getItem('gauprem_admin') === '1';
-
-  // Only show the bar on your devices when admin is set
-  if (isAdmin || !PROD_HOSTS.includes(location.hostname)) {
-    document.documentElement.classList.add('admin');
-  }
-})();
   </script>
 </body>
 </html>
