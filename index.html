@@ -102,6 +102,7 @@
           In many parts of rural India, cows are symbols of compassion, peace, and life. Yet too many face neglect, malnutrition, and disease. At <strong>GauPrem</strong> (CowLove), our mission is simple: rescue suffering cows and provide the <em>food, medical care, and safe shelter</em> they desperately need.
         </p>
         <div class="cta">
+          <!-- Hero button goes to GoFundMe -->
           <a class="btn" id="donateHero" href="https://www.gofundme.com/f/gauprem" target="_blank" rel="noopener noreferrer">Donate to GauPrem</a>
           <a class="btn ghost" id="moreInfo" href="https://drive.google.com/drive/folders/1K3IgFfyTfAOYU64uAkH3ogwWIFOvA-Yf" target="_blank" rel="noopener noreferrer">More info</a>
           <span class="minor">Every penny is used to feed impoverished cows in India.</span>
@@ -114,7 +115,6 @@
       </div>
 
       <figure class="figure card">
-        <!-- Hero image -->
         <img id="heroImg" src="IMG_3841.jpg" alt="A rescued cow photographed by the GauPrem team" />
         <figcaption class="caption editable" data-key="caption">Photo by the GauPrem Team — showing Ishan Narkar (CEO of GauPrem) caring for a small calf.</figcaption>
       </figure>
@@ -221,7 +221,7 @@
     const CONFIG_KEY = 'gauprem_site_config_v1';
     const DEFAULTS = {
       gofundmeUrl: 'https://www.gofundme.com/f/gauprem',
-      heroImg: 'IMG_3841.jpg' // desired hero image
+      heroImg: 'IMG_3841.jpg'
     };
 
     const $ = (sel) => document.querySelector(sel);
@@ -232,23 +232,23 @@
     }
     function saveConfig(cfg){ localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg)); }
 
-    // Load + normalize config (fix old emoji/placeholder values)
+    // Load + normalize config
     const cfg = loadConfig();
-    if (!cfg.heroImg || /data:image|placehold/i.test(cfg.heroImg) || cfg.heroImg === 'IMG_3967.jpg') {
+    if (!cfg.heroImg || /data:image|placehold/i.test(cfg.heroImg)) {
       cfg.heroImg = DEFAULTS.heroImg;
       saveConfig(cfg);
     }
 
-    const donateLinks = ['#donateTop','#donateMid'].map($);
+    const donateLinks = ['#donateTop','#donateMid','#donateHero'].map($);
     const heroImg = $('#heroImg');
 
     function applyConfig(){
+      // ✅ All donate buttons go to GoFundMe
       donateLinks.forEach(a => { if(a) a.href = cfg.gofundmeUrl; });
+
       if (heroImg) heroImg.src = cfg.heroImg;
 
-      const donateHeroBtn = document.getElementById('donateHero');
-      if (donateHeroBtn) { donateHeroBtn.href = 'https://inarkar25-dev.github.io/index/#/'; donateHeroBtn.textContent = 'Donate to GauPrem'; }
-
+      // Label the top button
       const donateTopBtn = document.getElementById('donateTop');
       if (donateTopBtn) donateTopBtn.textContent = 'GoFundMe';
     }
@@ -339,5 +339,6 @@
   </script>
 </body>
 </html>
+
 
 
